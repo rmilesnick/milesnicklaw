@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /intake.html
+
+Sitemap: https://milesnick.law/sitemap.xml

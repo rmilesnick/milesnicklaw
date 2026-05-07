@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Stories | How These Cases Begin | Milesnick Law</title>
+  <meta name="description" content="Real False Claims Act and whistleblower cases from Oregon and Washington — what made them cases, how they resolved, and what it means if you've seen something similar.">
+  <meta name="keywords" content="False Claims Act case examples Oregon, whistleblower case story Oregon, VA fraud whistleblower case, healthcare fraud qui tam example, PPP fraud whistleblower case">
+  <link rel="canonical" href="https://milesnick.law/case-stories.html">
+  <meta property="og:title" content="How These Cases Actually Begin | Milesnick Law">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="robots" content="index, follow">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "False Claims Act Case Examples",
+    "description": "Real FCA and whistleblower case examples from Oregon and Washington",
+    "itemListElement": [
+      {
+        "@type": "Article",
+        "position": 1,
+        "name": "VA Benefits Fraud — When the Description Didn't Match Reality",
+        "author": {"@type": "Person", "name": "Rob Milesnick"},
+        "publisher": {"@type": "Organization", "name": "Milesnick Law"}
+      },
+      {
+        "@type": "Article",
+        "position": 2,
+        "name": "Healthcare Kickbacks — When Payments Influenced Decisions",
+        "author": {"@type": "Person", "name": "Rob Milesnick"},
+        "publisher": {"@type": "Organization", "name": "Milesnick Law"}
+      },
+      {
+        "@type": "Article",
+        "position": 3,
+        "name": "PPP Fraud — When the Certification Wasn't True",
+        "author": {"@type": "Person", "name": "Rob Milesnick"},
+        "publisher": {"@type": "Organization", "name": "Milesnick Law"}
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .story-nav {
+      display: flex; gap: 2px; margin-bottom: 3rem;
+      background: var(--gold);
+    }
+    .story-tab {
+      flex: 1; padding: 1rem 1.5rem;
+      background: var(--cream-dark);
+      border: none; cursor: pointer;
+      font-family: var(--font-body);
+      font-size: .83rem; color: var(--muted);
+      letter-spacing: .05em; text-transform: uppercase;
+      transition: background .2s, color .2s;
+      text-align: left;
+    }
+    .story-tab.active {
+      background: var(--cream);
+      color: var(--navy); font-weight: 500;
+    }
+    .story-tab:hover:not(.active) { background: #DDD8CE; }
+
+    .story { display: none; }
+    .story.active { display: block; }
+
+    .story-header {
+      border-left: 3px solid var(--gold);
+      padding: 2.5rem 3rem;
+      background: var(--cream);
+      margin-bottom: 3rem;
+    }
+    .story-type {
+      font-size: .72rem; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .story-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem,3vw,2.2rem);
+      font-weight: 400; color: var(--navy);
+      line-height: 1.3; margin-bottom: 1rem;
+    }
+    .story-header p {
+      font-size: 1rem; color: var(--muted);
+      line-height: 1.85; max-width: 680px;
+    }
+
+    .story-body { display: grid; grid-template-columns: 1fr 340px; gap: 4rem; align-items: start; }
+
+    .narrative h3 {
+      font-family: var(--font-display);
+      font-size: 1.25rem; font-weight: 500;
+      color: var(--navy); margin: 2rem 0 .875rem;
+    }
+    .narrative h3:first-child { margin-top: 0; }
+    .narrative p {
+      font-size: .93rem; color: var(--muted);
+      line-height: 1.9; margin-bottom: 1rem;
+    }
+    .narrative .pullquote {
+      font-family: var(--font-display);
+      font-size: 1.35rem; font-style: italic;
+      font-weight: 400; color: var(--navy);
+      line-height: 1.55; border-left: 3px solid var(--gold);
+      padding: 1.25rem 1.75rem;
+      margin: 2rem 0; background: var(--cream);
+    }
+
+    .sidebar-card {
+      background: var(--navy);
+      padding: 2rem;
+      border-top: 3px solid var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .sidebar-card .label {
+      font-size: .72rem; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .outcome-num {
+      font-family: var(--font-display);
+      font-size: 2.5rem; font-weight: 300;
+      color: var(--gold); line-height: 1;
+      margin-bottom: .4rem;
+    }
+    .outcome-sub {
+      font-size: .82rem; color: rgba(244,239,230,.55);
+      line-height: 1.65; margin-bottom: 1.25rem;
+    }
+
+    .what-made-it {
+      background: var(--cream-dark);
+      padding: 2rem; border-top: 2px solid var(--gold);
+    }
+    .what-made-it .label {
+      font-size: .72rem; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .what-made-it ul { list-style: none; }
+    .what-made-it li {
+      display: flex; gap: .75rem; align-items: flex-start;
+      font-size: .88rem; color: var(--charcoal);
+      line-height: 1.65; margin-bottom: .875rem;
+    }
+    .what-made-it li::before {
+      content: '✓'; color: #558B2F;
+      flex-shrink: 0; font-weight: 500;
+    }
+
+    .insight-box {
+      background: var(--cream);
+      border: 1px solid rgba(28,41,54,.12);
+      padding: 1.75rem; margin-top: 2rem;
+    }
+    .insight-box .label {
+      font-size: .72rem; letter-spacing:.1em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: .75rem;
+    }
+    .insight-box p {
+      font-size: .9rem; color: var(--muted);
+      line-height: 1.8; margin-bottom: 0;
+    }
+
+    .applies-to-you {
+      background: rgba(184,150,46,.07);
+      border: 1px solid rgba(184,150,46,.2);
+      padding: 2rem; margin-top: 3rem;
+    }
+    .applies-to-you h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem; color: var(--navy);
+      margin-bottom: .75rem;
+    }
+    .applies-to-you p {
+      font-size: .9rem; color: var(--muted);
+      line-height: 1.8; margin-bottom: 1rem;
+    }
+
+    .disclaimer-note {
+      font-size: .78rem; color: var(--muted);
+      font-style: italic; margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(28,41,54,.1);
+      line-height: 1.65;
+    }
+
+    @media(max-width:700px) {
+      .story-body { grid-template-columns: 1fr; }
+      .story-header { padding: 1.75rem 1.5rem; }
+      .story-tab { font-size: .75rem; padding: .875rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Milesnick<span>.</span>Law</a>
+  <ul class="nav-links">
+    <li><a href="fca.html">False Claims Act</a></li>
+    <li><a href="oregon-whistleblower.html">Oregon FCA</a></li>
+    <li><a href="washington-whistleblower.html">Washington FCA</a></li>
+    <li><a href="employment.html">Employment</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="intake.html" class="nav-cta">Free Screening</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--gold);font-size:.73rem;letter-spacing:.16em;text-transform:uppercase;display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;">
+      Case Stories
+      <span style="display:block;width:36px;height:1px;background:var(--gold);"></span>
+    </div>
+    <h1>How these cases actually begin — and what made them cases.</h1>
+    <p>These are real matters that resulted in significant recoveries. The details are public record. What they share is a pattern: someone noticed something that didn't add up, came forward, and the government recovered money it wouldn't have recovered without them.</p>
+  </div>
+</div>
+
+<section class="section bg-cream">
+  <div class="wrap">
+
+    <!-- Story Navigation -->
+    <div class="story-nav">
+      <button class="story-tab active" onclick="showStory('va')">VA Benefits Fraud</button>
+      <button class="story-tab" onclick="showStory('hc')">Healthcare Kickbacks</button>
+      <button class="story-tab" onclick="showStory('ppp')">PPP Loan Fraud</button>
+    </div>
+
+    <!-- STORY 1: VA Benefits -->
+    <div class="story active" id="story-va">
+      <div class="story-header">
+        <div class="story-type">Oregon · VA Fraud · False Claims Act</div>
+        <h2>When the Description Didn't Match What Was Actually Happening</h2>
+        <p>Former employees at a company operating retirement facilities began to notice something. Veterans and their families were being assisted in applying for government benefits — but what was being described to the VA wasn't quite what was actually being provided.</p>
+      </div>
+
+      <div class="story-body">
+        <div class="narrative">
+          <h3>What they saw</h3>
+          <p>The employees weren't lawyers. They weren't compliance officers. They were people working in the facility who noticed that the services being described in applications to the VA's Aid and Attendance program didn't always match what was happening on the ground.</p>
+          <p>Aid and Attendance is a federal benefit program for veterans and their surviving spouses who need help with daily activities. To qualify, certain types of care must be provided. The government pays based on what it's told is being delivered.</p>
+          <p>The disconnect wasn't subtle after a while. What was described on paper and what was being delivered weren't the same thing — and the government was paying based on the description.</p>
+
+          <div class="pullquote">"The government was paying for care based on information that wasn't accurate. That's the case — not the care itself."</div>
+
+          <h3>Why they came forward</h3>
+          <p>These weren't people looking for a windfall. They were people who had worked in a setting that served veterans — people who had served their country — and who found themselves unable to ignore what they were seeing. The thought that veterans' benefits were being obtained through false representations was something they couldn't set aside.</p>
+          <p>They found counsel. They filed under seal. The government investigated. DOJ intervened.</p>
+
+          <h3>How it resolved</h3>
+          <p>The case settled for approximately $8.86 million. The whistleblowers — former employees who brought the case — received approximately $1.5 million as their share of the government's recovery.</p>
+
+          <div class="applies-to-you">
+            <h3>If you've seen something similar</h3>
+            <p>You don't have to work in healthcare or veterans services to recognize this pattern. Anytime a company is receiving federal money based on descriptions of services, care, or conduct that don't match what's actually happening — that's the pattern the False Claims Act was built to address.</p>
+            <p>The question isn't whether you have a legal background. It's whether what you witnessed involved federal money being paid based on information that wasn't accurate.</p>
+            <a href="intake.html" class="btn-primary" style="display:inline-block;margin-top:.5rem;">Talk to us confidentially →</a>
+          </div>
+
+          <p class="disclaimer-note">This matter is part of the public record of False Claims Act enforcement. The description above is based on publicly available information. It is provided for educational purposes only and does not constitute legal advice. Prior results do not guarantee similar outcomes.</p>
+        </div>
+
+        <div>
+          <div class="sidebar-card">
+            <div class="label">Resolution</div>
+            <div class="outcome-num">$8.86M</div>
+            <div class="outcome-sub">Total settlement recovery by the government</div>
+            <div class="outcome-num" style="font-size:1.75rem;">~$1.5M</div>
+            <div class="outcome-sub">Received by the whistleblowers who brought the case</div>
+          </div>
+
+          <div class="what-made-it">
+            <div class="label">What Made This a Case</div>
+            <ul>
+              <li>Federal money was involved — VA benefits are funded by the government</li>
+              <li>Representations were made to obtain that money</li>
+              <li>Those representations did not match the services being delivered</li>
+              <li>The whistleblowers had firsthand, direct knowledge of the gap</li>
+              <li>The conduct was ongoing, not an isolated incident</li>
+            </ul>
+          </div>
+
+          <div class="insight-box">
+            <div class="label">The Legal Principle</div>
+            <p>FCA cases often don't involve services that were never provided. They involve services that were described inaccurately in order to qualify for payment the government would not otherwise have made.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STORY 2: Healthcare Kickbacks -->
+    <div class="story" id="story-hc">
+      <div class="story-header">
+        <div class="story-type">Oregon · Healthcare Fraud · False Claims Act</div>
+        <h2>When Financial Payments Were Influencing Medical Decisions</h2>
+        <p>A medical device manufacturer was providing payments, travel, and benefits to physicians. At the same time, those physicians were selecting the company's devices — and submitting the resulting claims to Medicare and Medicaid.</p>
+      </div>
+
+      <div class="story-body">
+        <div class="narrative">
+          <h3>What it looked like from the inside</h3>
+          <p>The payments had labels. Training fees. Speaking honoraria. Consulting arrangements. Advisory board memberships. On paper, they were business expenses associated with legitimate professional relationships.</p>
+          <p>But someone watching from inside — a sales representative, a compliance employee, an operations person — could see the pattern. The payments and the prescribing decisions moved together. Physicians who received more received more. The financial relationship and the clinical relationship were not separate.</p>
+          <p>Federal law — the Anti-Kickback Statute — prohibits paying anything of value to influence decisions about care reimbursed by federal healthcare programs. When those payments influence which devices get used, and Medicare or Medicaid pays for the procedures, the resulting claims may be legally false.</p>
+
+          <div class="pullquote">"Even when the device worked and the procedure was performed, the claim was false — because the decision to use it was corrupted by payments the law prohibits."</div>
+
+          <h3>The legal principle most people miss</h3>
+          <p>This case illustrates one of the most important and most misunderstood principles in healthcare FCA enforcement: the care doesn't have to be fabricated for the claim to be false. If the decision to provide the care was improperly influenced — by financial incentives that the law prohibits — the claim may be false even if everything that was billed actually happened.</p>
+          <p>The government's question isn't "did the procedure occur?" It's "would we have paid if we had known the full picture?"</p>
+
+          <h3>Resolution</h3>
+          <p>The case resolved for approximately $12.95 million. Whistleblowers received approximately $2.1 million.</p>
+
+          <div class="applies-to-you">
+            <h3>If you've worked in medical sales, compliance, or healthcare administration</h3>
+            <p>The people who see these patterns most clearly are often not the physicians receiving the payments — they're the sales representatives managing the relationships, the compliance staff flagging concerns that get ignored, or the employees processing the paperwork who notice that the business flows in a particular direction.</p>
+            <p>If you've observed financial relationships between a medical company and the physicians or facilities it sells to, and you've wondered whether those relationships cross a line — that's worth a confidential conversation.</p>
+            <a href="intake.html" class="btn-primary" style="display:inline-block;margin-top:.5rem;">Talk to us confidentially →</a>
+          </div>
+
+          <p class="disclaimer-note">This matter is part of the public record of False Claims Act enforcement. The description above is based on publicly available information. It is provided for educational purposes only and does not constitute legal advice. Prior results do not guarantee similar outcomes.</p>
+        </div>
+
+        <div>
+          <div class="sidebar-card">
+            <div class="label">Resolution</div>
+            <div class="outcome-num">$12.95M</div>
+            <div class="outcome-sub">Total settlement recovery — Oregon-based medical device manufacturer</div>
+            <div class="outcome-num" style="font-size:1.75rem;">~$2.1M</div>
+            <div class="outcome-sub">Received by the whistleblowers who brought the case</div>
+          </div>
+
+          <div class="what-made-it">
+            <div class="label">What Made This a Case</div>
+            <ul>
+              <li>Federal programs (Medicare/Medicaid) were paying for the procedures</li>
+              <li>Financial payments to physicians were influencing device selection</li>
+              <li>The payments exceeded what legitimate services would warrant</li>
+              <li>Insiders had direct knowledge of the payment structure</li>
+              <li>The pattern was systematic — not isolated transactions</li>
+            </ul>
+          </div>
+
+          <div class="insight-box">
+            <div class="label">The Legal Principle</div>
+            <p>Claims can be legally false even when care is actually provided — if the decision to provide it was driven by financial incentives that federal law prohibits rather than clinical judgment.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STORY 3: PPP Fraud -->
+    <div class="story" id="story-ppp">
+      <div class="story-header">
+        <div class="story-type">Washington · PPP Fraud · False Claims Act</div>
+        <h2>When the Certification Wasn't Accurate — and the Government Paid Anyway</h2>
+        <p>Several companies in Washington received Paycheck Protection Program loans during the pandemic. They certified eligibility. But in multiple cases, that certification didn't reflect the companies' actual structure — and the government paid based on representations that weren't true.</p>
+      </div>
+
+      <div class="story-body">
+        <div class="narrative">
+          <h3>How PPP eligibility actually worked</h3>
+          <p>The Paycheck Protection Program had rules. Businesses had to certify that they were small enough to qualify — typically under 500 employees when affiliated entities were counted together. They had to certify that the funds would be used for payroll and approved expenses. They had to certify, later, in the loan forgiveness application, that they had used the money as required.</p>
+          <p>Each certification was a representation to the federal government. And the federal government paid based on those representations.</p>
+
+          <div class="pullquote">"These cases are not about whether businesses needed the money. They are about whether they qualified to receive it — and whether they said so truthfully."</div>
+
+          <h3>What the insiders knew</h3>
+          <p>The people who recognize PPP fraud are often the ones who processed the applications — accountants, CFOs, loan officers, payroll administrators who knew that the employee count being certified didn't reflect the full picture once affiliates were counted, or that the payroll numbers being used didn't match the company's actual records.</p>
+          <p>Sometimes it's someone who watched a company certify its way to a forgivable loan while knowing the company clearly exceeded the eligibility thresholds. Sometimes it's someone who prepared the forgiveness application and knew that the uses being certified weren't accurate.</p>
+
+          <h3>Why these cases are still open</h3>
+          <p>The statute of limitations for most PPP fraud hasn't reached its midpoint. PPP loans were issued beginning in April 2020. The False Claims Act's six-year window means significant exposure remains open. Cases are still being filed, and DOJ is still actively pursuing them.</p>
+
+          <h3>Resolution</h3>
+          <p>Multiple Washington companies agreed to repay more than $5.4 million in connection with PPP loan eligibility fraud. At least one of those cases was initiated by a whistleblower with inside knowledge of the companies' actual structure.</p>
+
+          <div class="applies-to-you">
+            <h3>If you know something about a PPP application that wasn't accurate</h3>
+            <p>The most important question isn't whether the business needed the money. It's whether the certifications were accurate. If you were involved in preparing, reviewing, or approving a PPP application and you knew — or strongly suspected — that the certifications didn't reflect reality, that's worth a confidential conversation.</p>
+            <p>The window is still open. Early evaluation matters.</p>
+            <a href="intake.html" class="btn-primary" style="display:inline-block;margin-top:.5rem;">Talk to us confidentially →</a>
+          </div>
+
+          <p class="disclaimer-note">This matter is part of the public record of False Claims Act enforcement. The description above is based on publicly available information. It is provided for educational purposes only and does not constitute legal advice. Prior results do not guarantee similar outcomes.</p>
+        </div>
+
+        <div>
+          <div class="sidebar-card">
+            <div class="label">Washington Resolution</div>
+            <div class="outcome-num">$5.4M+</div>
+            <div class="outcome-sub">Repaid by multiple Washington companies in PPP eligibility fraud cases</div>
+            <div style="border-top:1px solid rgba(184,150,46,.2);padding-top:1.25rem;margin-top:1.25rem;">
+              <div style="font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;">National Context</div>
+              <div style="font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:300;color:var(--gold-light);line-height:1;margin-bottom:.4rem;">$6.8B</div>
+              <div style="font-size:.82rem;color:rgba(244,239,230,.55);line-height:1.65;">Total FCA recoveries in FY2025 — the largest annual total in history. Pandemic fraud enforcement is a major component.</div>
+            </div>
+          </div>
+
+          <div class="what-made-it">
+            <div class="label">What Made These Cases</div>
+            <ul>
+              <li>Federal funds (SBA/Treasury) were involved in the loans</li>
+              <li>Eligibility certifications were inaccurate — employee counts, affiliation rules</li>
+              <li>The forgiveness application created a second false claim in many cases</li>
+              <li>Insiders had direct knowledge of the companies' actual structure</li>
+              <li>The statute of limitations remains open for most pandemic-era conduct</li>
+            </ul>
+          </div>
+
+          <div class="insight-box">
+            <div class="label">The Legal Principle</div>
+            <p>PPP fraud is an eligibility question, not a need question. Whether the company qualified — based on accurate disclosures of size, structure, and affiliates — is what the FCA evaluates.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Bottom CTA -->
+<div class="cta-banner">
+  <h2>Do you recognize something in these stories?</h2>
+  <p>The screening is free, confidential, and available now. You don't need a legal framework — just what you know.</p>
+  <a href="intake.html" class="btn-primary">Begin Confidential Screening →</a>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Milesnick Law</div>
+      <p>Licensed in Oregon and Washington · State &amp; Federal Courts<br>District of Oregon · Western District of Washington · Ninth Circuit</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="fca.html">False Claims Act</a></li>
+      <li><a href="how-we-evaluate.html">How Cases Are Evaluated</a></li>
+      <li><a href="intake.html">Free Screening</a></li>
+    </ul>
+    <p class="footer-disclaimer">Attorney advertising. Case descriptions are based on public record and provided for educational purposes only. No attorney-client relationship is formed by use of this site. Prior results do not guarantee similar outcomes.</p>
+  </div>
+</footer>
+
+<script>
+function showStory(id) {
+  document.querySelectorAll('.story').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.story-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('story-' + id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({top: document.querySelector('.story-nav').offsetTop - 80, behavior: 'smooth'});
+}
+</script>
+
+</body>
+</html>
