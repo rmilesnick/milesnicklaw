@@ -6,6 +6,49 @@
   <title>About Rob Milesnick | Former AUSA | Portland, Oregon Attorney | Milesnick Law</title>
   <meta name="description" content="Rob Milesnick is a Portland attorney and former Assistant U.S. Attorney with 15+ years of experience in plaintiff employment, federal prosecution, defense litigation, and mediation. Now selectively representing whistleblowers and discrimination plaintiffs.">
   <link rel="canonical" href="https://milesnick.law/about.html">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Attorney",
+    "@id": "https://milesnick.law/about.html",
+    "name": "Rob Milesnick",
+    "url": "https://milesnick.law/about.html",
+    "image": "https://milesnick.law/photos/about-primary.jpg",
+    "description": "Portland attorney and former Assistant U.S. Attorney with 15+ years of experience in False Claims Act whistleblower representation, employment discrimination, and civil rights.",
+    "jobTitle": "Attorney",
+    "worksFor": {
+      "@type": "LegalService",
+      "@id": "https://milesnick.law/#legalservice",
+      "name": "Milesnick Law"
+    },
+    "alumniOf": [
+      { "@type": "EducationalOrganization", "name": "Syracuse University College of Law" },
+      { "@type": "EducationalOrganization", "name": "Virginia Commonwealth University" }
+    ],
+    "hasCredential": [
+      "Former Assistant U.S. Attorney, District of Oregon",
+      "Oregon State Bar",
+      "Washington State Bar",
+      "Admitted: U.S. District Court, District of Oregon",
+      "Admitted: U.S. District Court, Western District of Washington",
+      "Admitted: U.S. Court of Appeals, Ninth Circuit"
+    ],
+    "knowsAbout": [
+      "False Claims Act",
+      "Qui Tam Whistleblower",
+      "Employment Discrimination",
+      "Whistleblower Retaliation",
+      "Title VII",
+      "Civil Rights",
+      "Federal Prosecution",
+      "Mediation"
+    ],
+    "areaServed": [
+      { "@type": "State", "name": "Oregon" },
+      { "@type": "State", "name": "Washington" }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -23,7 +66,9 @@
     <li><a href="about.html">About</a></li>
     <li><a href="intake.html" class="nav-cta">Free Screening</a></li>
   </ul>
+  <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
+<div class="nav-overlay"></div>
 
 <!-- Page Hero -->
 <div class="page-hero">
@@ -173,5 +218,16 @@
   </div>
 </footer>
 
+<script>
+(function(){
+  var btn=document.querySelector('.hamburger');
+  var nav=document.querySelector('.nav-links');
+  var overlay=document.querySelector('.nav-overlay');
+  function closeMenu(){btn.setAttribute('aria-expanded','false');nav.classList.remove('nav-open');overlay.classList.remove('nav-overlay--visible');}
+  btn.addEventListener('click',function(){var open=nav.classList.toggle('nav-open');btn.setAttribute('aria-expanded',String(open));overlay.classList.toggle('nav-overlay--visible',open);});
+  overlay.addEventListener('click',closeMenu);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
+})();
+</script>
 </body>
 </html>
