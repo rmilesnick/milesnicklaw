@@ -50,7 +50,9 @@
     <li><a href="about.html">About</a></li>
     <li><a href="intake.html" class="nav-cta">Free Screening</a></li>
   </ul>
+  <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
+<div class="nav-overlay"></div>
 
 <!-- Hero -->
 <div class="page-hero">
@@ -267,5 +269,16 @@
   </div>
 </footer>
 
+<script>
+(function(){
+  var btn=document.querySelector('.hamburger');
+  var nav=document.querySelector('.nav-links');
+  var overlay=document.querySelector('.nav-overlay');
+  function closeMenu(){btn.setAttribute('aria-expanded','false');nav.classList.remove('nav-open');overlay.classList.remove('nav-overlay--visible');}
+  btn.addEventListener('click',function(){var open=nav.classList.toggle('nav-open');btn.setAttribute('aria-expanded',String(open));overlay.classList.toggle('nav-overlay--visible',open);});
+  overlay.addEventListener('click',closeMenu);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
+})();
+</script>
 </body>
 </html>
