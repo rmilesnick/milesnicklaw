@@ -47,6 +47,8 @@
     .route-link{display:inline-block;margin-right:10px;margin-top:8px;padding:8px 18px;border-radius:20px;font-size:13px;font-weight:500;text-decoration:none;border:1px solid rgba(28,41,54,.15);color:var(--charcoal);background:#fff;font-family:'DM Sans',sans-serif;cursor:pointer}
     .route-link.primary{background:var(--navy);color:var(--cream);border-color:transparent}
     .disclaimer-bar{padding:.75rem 1.75rem;background:rgba(28,41,54,.03);border-top:1px solid rgba(28,41,54,.06);font-size:11px;color:var(--muted);line-height:1.5}
+    .category-option{display:flex;align-items:center;gap:.75rem;cursor:pointer;padding:.75rem 1rem;border:1px solid rgba(28,41,54,.15);border-radius:4px;background:#fff;transition:border-color .2s,background .2s}
+    .category-option:has(input:checked){border-color:var(--navy);background:rgba(13,27,42,.04)}
   </style>
 </head>
 <body>
@@ -85,8 +87,38 @@
         <div id="disclosureGate" style="background:var(--cream-dark);border:1px solid rgba(28,41,54,.15);border-radius:4px;padding:1.75rem;margin-bottom:1.25rem;">
           <div style="font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:.875rem;">Before You Begin — Please Read</div>
           <p style="font-size:.85rem;color:var(--charcoal);line-height:1.75;margin-bottom:1rem;">This AI screening tool is <strong>not a lawyer</strong> and does not provide legal advice. Use of this tool <strong>does not create an attorney-client relationship</strong>. Please keep your responses general — do not share highly detailed, sensitive, or privileged information at this stage. This system collects preliminary information only to determine whether a consultation may be appropriate.</p>
-          <p style="font-size:.85rem;color:var(--charcoal);line-height:1.75;margin-bottom:1rem;">Information is transmitted using encrypted connections and stored in a secured environment with restricted access. Full attorney-client confidentiality protections do not apply until a conflict check is completed and a formal engagement is established.</p>
-          <p style="font-size:.83rem;color:var(--muted);line-height:1.7;margin-bottom:1.25rem;">For your privacy: use a personal device and personal email — not a work device or work email. Do not remove or copy documents from your employer before speaking with an attorney. <a href="privacy.html" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold);">Full Privacy &amp; AI Use Notice →</a></p>
+          <p style="font-size:.85rem;color:var(--charcoal);line-height:1.75;margin-bottom:1.25rem;">Information is transmitted using encrypted connections and stored in a secured environment with restricted access. Full attorney-client confidentiality protections do not apply until a conflict check is completed and a formal engagement is established.</p>
+
+          <!-- Security warnings -->
+          <div style="background:rgba(198,40,40,0.05);border:1px solid rgba(198,40,40,0.3);border-left:3px solid #C62828;border-radius:2px;padding:1rem 1.25rem;margin-bottom:1.25rem;">
+            <div style="font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#C62828;font-weight:500;margin-bottom:.625rem;">Do Not Submit Through This Tool</div>
+            <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.5rem;">
+              <li style="display:flex;gap:.625rem;align-items:flex-start;font-size:.83rem;color:var(--charcoal);line-height:1.65;"><span style="color:#C62828;font-weight:700;flex-shrink:0;">&#x2715;</span><span><strong>Do not submit confidential documents, privileged communications, or sensitive records</strong> — detailed evidence should be shared only in a formal, protected consultation.</span></li>
+              <li style="display:flex;gap:.625rem;align-items:flex-start;font-size:.83rem;color:var(--charcoal);line-height:1.65;"><span style="color:#C62828;font-weight:700;flex-shrink:0;">&#x2715;</span><span><strong>Do not use a work device or work email to contact us</strong> — employer IT systems can monitor both.</span></li>
+              <li style="display:flex;gap:.625rem;align-items:flex-start;font-size:.83rem;color:var(--charcoal);line-height:1.65;"><span style="color:#C62828;font-weight:700;flex-shrink:0;">&#x2715;</span><span>Do not remove or copy documents from your employer's systems before speaking with an attorney.</span></li>
+            </ul>
+            <a href="privacy.html" style="display:inline-block;margin-top:.75rem;font-size:.8rem;color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold);">Full Privacy &amp; AI Use Notice →</a>
+          </div>
+
+          <!-- Issue type selector -->
+          <div style="margin-bottom:1.25rem;">
+            <div style="font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);font-weight:500;margin-bottom:.625rem;">What best describes your situation?</div>
+            <div style="display:flex;flex-direction:column;gap:.4rem;">
+              <label class="category-option">
+                <input type="radio" name="issueType" value="fca" style="accent-color:var(--navy);width:15px;height:15px;flex-shrink:0;">
+                <span style="font-size:.87rem;color:var(--charcoal);font-weight:500;">False Claims Act / Whistleblower</span>
+              </label>
+              <label class="category-option">
+                <input type="radio" name="issueType" value="employment" style="accent-color:var(--navy);width:15px;height:15px;flex-shrink:0;">
+                <span style="font-size:.87rem;color:var(--charcoal);font-weight:500;">Employment Discrimination or Retaliation</span>
+              </label>
+              <label class="category-option">
+                <input type="radio" name="issueType" value="notsure" style="accent-color:var(--navy);width:15px;height:15px;flex-shrink:0;">
+                <span style="font-size:.87rem;color:var(--charcoal);font-weight:500;">Not sure yet</span>
+              </label>
+            </div>
+          </div>
+
           <label style="display:flex;align-items:flex-start;gap:.75rem;cursor:pointer;">
             <input type="checkbox" id="disclosureCheck" style="margin-top:3px;flex-shrink:0;width:16px;height:16px;accent-color:var(--navy);">
             <span style="font-size:.85rem;color:var(--charcoal);line-height:1.6;">I understand that this tool is not a lawyer, that no attorney-client relationship is created by this conversation, and that I should keep my responses general and not share sensitive or privileged information at this stage.</span>
