@@ -202,7 +202,7 @@
 </footer>
 
 <script>
-const PROXY_URL = 'YOUR_CLOUDFLARE_WORKER_URL_HERE';
+const PROXY_URL = 'https://milesnick-intake.rmilesnick.workers.dev';
 
 // System prompt lives in Cloudflare Worker — not stored client-side.
 
@@ -250,7 +250,7 @@ function showRoute(tier) {
     rl.style.color = '#8B6914';
     rk.innerHTML = `
       <p style="font-size:.85rem;color:var(--charcoal);margin-bottom:.75rem;">Rob offers one-hour consultations for contract review and general employment matters at <strong>$400</strong>. Payment is required to book.</p>
-      <a href="https://square.link/PLACEHOLDER" target="_blank" class="route-link primary">Pay & Schedule Consultation →</a>
+      <a href="https://calendly.com/robert-milesnick" target="_blank" class="route-link primary">Pay & Schedule Consultation →</a>
       <a href="mailto:robert@milesnick.law?subject=Paid%20Consultation%20Request" class="route-link">Questions? Email Rob →</a>`;
     document.getElementById('inputArea').style.display = 'none';
     lockInput(true);
