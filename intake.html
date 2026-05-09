@@ -131,16 +131,16 @@
         <div id="screenerMain" style="display:none;">
         <div class="screener-wrap">
           <div class="screener-header">
-            <div class="screener-avatar">RM</div>
+            <div class="screener-avatar">Aid</div>
             <div>
-              <div class="screener-title">Milesnick Law · Confidential Intake</div>
+              <div class="screener-title">Milesnick Law · AI Intake Screener</div>
               <div class="screener-sub">Submitted for attorney review · Former AUSA</div>
             </div>
             <div class="online-dot"></div>
           </div>
           <div class="chat-area" id="chat"></div>
           <div class="typing-row" id="typing">
-            <div class="av ai">RM</div>
+            <div class="av ai">Aid</div>
             <div class="typing-bbl"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
           </div>
           <div class="input-area" id="inputArea">
@@ -213,7 +213,7 @@ function addMsg(role, text) {
   const c = document.getElementById('chat');
   const d = document.createElement('div');
   d.className = 'msg' + (role === 'user' ? ' u' : '');
-  d.innerHTML = '<div class="av ' + (role === 'user' ? 'u' : 'ai') + '">' + (role === 'user' ? 'You' : 'RM') + '</div><div class="bbl">' + text.replace(/\n/g, '<br>') + '</div>';
+  d.innerHTML = '<div class="av ' + (role === 'user' ? 'u' : 'ai') + '">' + (role === 'user' ? 'You' : 'Aid') + '</div><div class="bbl">' + text.replace(/\n/g, '<br>') + '</div>';
   c.appendChild(d);
   c.scrollTop = c.scrollHeight;
 }
