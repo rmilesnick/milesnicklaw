@@ -495,7 +495,10 @@
   var nav=document.querySelector('.nav-links');
   var overlay=document.querySelector('.nav-overlay');
   function closeMenu(){btn.setAttribute('aria-expanded','false');nav.classList.remove('nav-open');overlay.classList.remove('nav-overlay--visible');}
-  btn.addEventListener('click',function(){var open=nav.classList.toggle('nav-open');btn.setAttribute('aria-expanded',String(open));overlay.classList.toggle('nav-overlay--visible',open);});
+  function toggleMenu(e){e.preventDefault();var open=nav.classList.toggle('nav-open');btn.setAttribute('aria-expanded',String(open));overlay.classList.toggle('nav-overlay--visible',open);}
+  btn.addEventListener('touchstart',toggleMenu,{passive:false});
+  btn.addEventListener('click',toggleMenu);
+  overlay.addEventListener('touchstart',function(e){e.preventDefault();closeMenu();},{passive:false});
   overlay.addEventListener('click',closeMenu);
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
 })();
