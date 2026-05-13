@@ -380,7 +380,7 @@ footer {
 .hero-actions { animation: fadeUp .55s ease .3s both; }
 
 /* ── Hamburger ── */
-.hamburger { display: none; flex-direction: column; justify-content: space-between; width: 26px; height: 18px; background: none; border: none; cursor: pointer; padding: 0; z-index: 1001; }
+.hamburger { display: none; flex-direction: column; justify-content: space-between; width: 26px; height: 18px; background: none; border: none; cursor: pointer; padding: 0; z-index: 1001; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 .hamburger span { display: block; height: 2px; background: var(--cream); border-radius: 2px; transition: transform .25s ease, opacity .25s ease; }
 .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
 .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
