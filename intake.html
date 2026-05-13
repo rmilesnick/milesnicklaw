@@ -6,6 +6,12 @@
   <title>Free Confidential Case Screening | Milesnick Law</title>
   <meta name="description" content="Free confidential case screening for False Claims Act whistleblower and employment discrimination matters. Former Assistant U.S. Attorney reviews every matter personally.">
   <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://milesnick.law/intake.html">
+  <meta property="og:title" content="Free Confidential Case Screening | Milesnick Law">
+  <meta property="og:description" content="Begin a free confidential case screening for False Claims Act whistleblower or employment discrimination matters. Reviewed personally by former AUSA Rob Milesnick.">
+  <meta property="og:image" content="https://milesnick.law/rob-milesnick.webp">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -342,7 +348,10 @@ function startScreener() {
   var nav=document.querySelector('.nav-links');
   var overlay=document.querySelector('.nav-overlay');
   function closeMenu(){btn.setAttribute('aria-expanded','false');nav.classList.remove('nav-open');overlay.classList.remove('nav-overlay--visible');}
-  btn.addEventListener('click',function(){var open=nav.classList.toggle('nav-open');btn.setAttribute('aria-expanded',String(open));overlay.classList.toggle('nav-overlay--visible',open);});
+  function toggleMenu(e){e.preventDefault();var open=nav.classList.toggle('nav-open');btn.setAttribute('aria-expanded',String(open));overlay.classList.toggle('nav-overlay--visible',open);}
+  btn.addEventListener('touchstart',toggleMenu,{passive:false});
+  btn.addEventListener('click',toggleMenu);
+  overlay.addEventListener('touchstart',function(e){e.preventDefault();closeMenu();},{passive:false});
   overlay.addEventListener('click',closeMenu);
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
 })();
