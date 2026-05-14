@@ -411,6 +411,9 @@ footer {
 /* ── Hero mobile CTA block (hidden on desktop) ── */
 .hero-mobile-cta { display: none; }
 
+/* ── About page mobile photo (hidden on desktop) ── */
+.about-photo-mobile { display: none; }
+
 /* ── Small mobile: tighten hero headline ── */
 @media (max-width: 480px) {
   .hero h1 { font-size: 2rem; }
@@ -462,4 +465,6 @@ footer {
   .ausa-block { padding: 1.75rem 1.5rem; }
   .footer-inner { flex-direction: column; }
   .footer-disclaimer { max-width: 100%; }
+  .about-photo-mobile { display: block; float: right; width: 42%; max-height: 200px; object-fit: cover; object-position: center top; border-radius: 2px; margin: 0 0 1rem 1.25rem; }
+  .about-photo-desktop { display: none !important; }
 }
