@@ -456,6 +456,8 @@ footer {
   .hero-media { margin-top: 1.5rem; margin-right: 0; height: auto; }
   .hero-media img { height: 220px !important; object-fit: cover !important; }
   .hero-media::before { display: none; }
+  .hero-media-rule { display: none; }
+  .page-hero::after { display: none; }
   .two-col, .two-col-wide { grid-template-columns: 1fr; gap: 2.5rem; }
   .ausa-block { padding: 1.75rem 1.5rem; }
   .footer-inner { flex-direction: column; }
