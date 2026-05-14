@@ -408,10 +408,40 @@ footer {
   .nav-links .nav-cta { margin: 1.5rem 0 0; display: inline-block; }
 }
 
+/* ── Hero mobile CTA block (hidden on desktop) ── */
+.hero-mobile-cta { display: none; }
+
 /* ── Small mobile: tighten hero headline ── */
 @media (max-width: 480px) {
   .hero h1 { font-size: 2rem; }
   .hero { padding-top: 16px; }
+  .hero-mobile-cta {
+    display: block;
+    margin-bottom: 8px;
+  }
+  .hero-mobile-cta__btn {
+    display: block;
+    text-align: center;
+    background: var(--gold);
+    color: var(--navy);
+    padding: .75rem 1.5rem;
+    font-size: .9rem;
+    font-weight: 500;
+    border-radius: 2rem;
+    text-decoration: none;
+    letter-spacing: .03em;
+    transition: background .2s;
+  }
+  .hero-mobile-cta__btn:hover { background: var(--gold-light); }
+  .hero-mobile-cta__sub {
+    display: block;
+    text-align: center;
+    font-size: .75rem;
+    color: rgba(244,239,230,.42);
+    font-weight: 300;
+    margin-top: .5rem;
+    margin-bottom: 0;
+  }
 }
 
 /* ── Mobile layout ── */
