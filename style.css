@@ -414,6 +414,8 @@ footer {
 /* ── Small mobile: tighten hero headline ── */
 @media (max-width: 480px) {
   .hero h1 { font-size: 2rem; }
+  .hero h1 .hero-line { display: block; }
+  .hero-br { display: none; }
   .hero { padding-top: 16px; }
   .hero-mobile-cta {
     display: block;
