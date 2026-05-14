@@ -385,6 +385,12 @@ footer {
 .hero-actions { animation: fadeUp .55s ease .3s both; }
 
 /* ── Hamburger ── */
+.nav-end { display: flex; align-items: center; gap: .75rem; }
+.nav-call { display: none; }
+@media (max-width: 480px) {
+  .nav-call { display: inline-flex; align-items: center; padding: .3rem .8rem; border-radius: 2rem; border: 1px solid rgba(184,150,46,.75); color: var(--gold); font-size: .7rem; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; text-decoration: none; white-space: nowrap; }
+  .nav-call:hover { background: rgba(184,150,46,.12); }
+}
 .hamburger { display: none; flex-direction: column; justify-content: space-between; width: 26px; height: 18px; background: none; border: none; cursor: pointer; padding: 0; z-index: 1001; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 .hamburger span { display: block; height: 2px; background: var(--cream); border-radius: 2px; transition: transform .25s ease, opacity .25s ease; }
 .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
