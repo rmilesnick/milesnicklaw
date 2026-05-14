@@ -289,8 +289,26 @@
   <span>Tell Us What Happened</span>
 </a>
 <style>
-.chat-bubble{position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;display:flex;align-items:center;gap:.5rem;background:#0d1b2a;color:#b8962e;border:1px solid #b8962e;padding:.6rem 1rem .6rem .75rem;border-radius:2rem;font-family:'Montserrat','Helvetica Neue',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;box-shadow:0 4px 20px rgba(0,0,0,.35);transition:background .2s,color .2s}
+.chat-bubble{position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;display:flex;align-items:center;gap:.5rem;background:#0d1b2a;color:#b8962e;border:1px solid #b8962e;padding:.6rem 1rem .6rem .75rem;border-radius:2rem;font-family:'Montserrat','Helvetica Neue',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;box-shadow:0 4px 20px rgba(0,0,0,.35);transition:opacity .3s,background .2s,color .2s}
 .chat-bubble:hover{background:#b8962e;color:#0d1b2a}
+@media(max-width:700px){.chat-bubble{opacity:0;pointer-events:none}.chat-bubble.chat-bubble--visible{opacity:1;pointer-events:auto}}
 </style>
+<script>
+(function(){
+  var bubble=document.querySelector('.chat-bubble');
+  if(!bubble)return;
+  function update(){
+    if(window.innerWidth<=700){
+      var show=window.scrollY>=400;
+      bubble.classList.toggle('chat-bubble--visible',show);
+    } else {
+      bubble.classList.add('chat-bubble--visible');
+    }
+  }
+  window.addEventListener('scroll',update,{passive:true});
+  window.addEventListener('resize',update);
+  update();
+})();
+</script>
 </body>
 </html>
