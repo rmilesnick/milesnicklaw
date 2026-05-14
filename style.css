@@ -415,6 +415,7 @@ footer {
 @media (max-width: 480px) {
   .hero h1 { font-size: 2rem; }
   .eyebrow::after { display: none; }
+  .hero { padding-top: 16px; }
 }
 
 /* ── Mobile layout ── */
