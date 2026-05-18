@@ -266,7 +266,7 @@ export default {
       });
     }
 
-    const { messages } = body;
+    const { messages, context } = body;
 
     if (!Array.isArray(messages) || messages.length === 0) {
       return new Response(JSON.stringify({ error: 'messages array required' }), {
@@ -320,6 +320,10 @@ export default {
       }
     }
 
+    const activeSystemPrompt = context === 'whistleblower'
+      ? SYSTEM_PROMPT + '\n\nPAGE CONTEXT: This conversation was initiated from the whistleblower page. The visitor has already been shown this opening message: "If you have concerns about fraud involving government money, I can help you figure out whether a confidential case evaluation makes sense. What is the general nature of what you are dealing with?" Begin in the WHISTLEBLOWER AND GOVERNMENT FRAUD TRACK from the first user response. Do not ask the general track identification question.'
+      : SYSTEM_PROMPT;
+
     let anthropicResponse;
     try {
       anthropicResponse = await fetch(ANTHROPIC_API_URL, {
@@ -332,7 +336,7 @@ export default {
         body: JSON.stringify({
           model: MODEL,
           max_tokens: MAX_TOKENS,
-          system: SYSTEM_PROMPT,
+          system: activeSystemPrompt,
           messages,
         }),
       });
