@@ -219,7 +219,7 @@ const PROXY_URL = 'https://milesnick-intake.rmilesnick.workers.dev';
 
 // System prompt lives in Cloudflare Worker — not stored client-side.
 
-const OPENING = "Thank you for reaching out. Before we begin — a few things worth knowing: this tool is not a lawyer and does not provide legal advice. No attorney-client relationship is created by this conversation. Please keep your answers general at this stage — detailed or sensitive information is better shared during a formal consultation. And please use a personal device and personal email, not a work device. With that said — are you here about a potential whistleblower or False Claims Act matter, an employment discrimination or retaliation issue, or possibly both?";
+const OPENING = "Thank you for reaching out. Before we begin — a few things worth knowing: this tool is not a lawyer and does not provide legal advice. No attorney-client relationship is created by this conversation. Please keep your answers general at this stage — detailed or sensitive information is better shared during a formal consultation. With that said — are you here about a potential whistleblower or False Claims Act matter, an employment discrimination or retaliation issue, or possibly both?";
 const history = [{ role: 'assistant', content: OPENING }];
 
 function addMsg(role, text) {

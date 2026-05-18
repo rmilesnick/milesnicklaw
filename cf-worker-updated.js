@@ -283,6 +283,40 @@ export default {
       });
     }
 
+    // Hard-stop intercepts — run before any Anthropic API call.
+    const lastUserMsg = [...messages].reverse().find(m => m.role === 'user');
+    if (lastUserMsg) {
+      const txt = lastUserMsg.content.toLowerCase();
+
+      // Hard Stop C — FinCEN direct filing
+      if (txt.includes('fincen') && /file|report|filing|directly|should i/.test(txt)) {
+        return new Response(JSON.stringify({
+          content: [{ type: 'text', text: 'Rob can walk you through where that program stands and whether filing now makes sense. The sequence matters.' }]
+        }), { status: 200, headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) } });
+      }
+
+      // Hard Stop A — sensitive details offered
+      if (
+        (txt.includes('paste') && (txt.includes('names') || txt.includes('documents') || txt.includes('amounts'))) ||
+        txt.includes('paste them here') ||
+        txt.includes('send you the documents')
+      ) {
+        return new Response(JSON.stringify({
+          content: [{ type: 'text', text: 'Please save those details for the confidential consultation. This chat is for general intake only.' }]
+        }), { status: 200, headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) } });
+      }
+
+      // Hard Stop B — award percentage
+      if (
+        (txt.includes('30%') || txt.includes('15%') || txt.includes('percent')) &&
+        (txt.includes('award') || txt.includes('qualify'))
+      ) {
+        return new Response(JSON.stringify({
+          content: [{ type: 'text', text: 'Award eligibility depends on the specific facts, the reporting pathway, and any government recovery. Rob can walk through that with you.' }]
+        }), { status: 200, headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) } });
+      }
+    }
+
     let anthropicResponse;
     try {
       anthropicResponse = await fetch(ANTHROPIC_API_URL, {
