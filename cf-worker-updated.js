@@ -290,6 +290,7 @@ export default {
 
       // Hard Stop C — FinCEN direct filing
       if (txt.includes('fincen') && /file|report|filing|directly|should i/.test(txt)) {
+        await new Promise(resolve => setTimeout(resolve, 1500));
         return new Response(JSON.stringify({
           content: [{ type: 'text', text: 'Rob can walk you through where that program stands and whether filing now makes sense. The sequence matters.' }]
         }), { status: 200, headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) } });
@@ -301,6 +302,7 @@ export default {
         txt.includes('paste them here') ||
         txt.includes('send you the documents')
       ) {
+        await new Promise(resolve => setTimeout(resolve, 1500));
         return new Response(JSON.stringify({
           content: [{ type: 'text', text: 'Please save those details for the confidential consultation. This chat is for general intake only.' }]
         }), { status: 200, headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) } });
@@ -311,6 +313,7 @@ export default {
         (txt.includes('30%') || txt.includes('15%') || txt.includes('percent')) &&
         (txt.includes('award') || txt.includes('qualify'))
       ) {
+        await new Promise(resolve => setTimeout(resolve, 1500));
         return new Response(JSON.stringify({
           content: [{ type: 'text', text: 'Award eligibility depends on the specific facts, the reporting pathway, and any government recovery. Rob can walk through that with you.' }]
         }), { status: 200, headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) } });
