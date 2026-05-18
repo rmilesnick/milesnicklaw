@@ -334,17 +334,19 @@ async function go() {
 }
 
 // Disclosure gate logic
-document.getElementById('disclosureCheck').addEventListener('change', function() {
+function checkReady() {
   const btn = document.getElementById('disclosureBtn');
-  if (this.checked) {
-    btn.disabled = false;
-    btn.style.background = 'var(--navy)';
-    btn.style.cursor = 'pointer';
-  } else {
-    btn.disabled = true;
-    btn.style.background = 'rgba(28,41,54,.2)';
-    btn.style.cursor = 'not-allowed';
-  }
+  const checked = document.getElementById('disclosureCheck').checked;
+  const radioSelected = !!document.querySelector('input[name="issueType"]:checked');
+  const ready = checked && radioSelected;
+  btn.disabled = !ready;
+  btn.style.background = ready ? 'var(--navy)' : 'rgba(28,41,54,.2)';
+  btn.style.cursor = ready ? 'pointer' : 'not-allowed';
+}
+
+document.getElementById('disclosureCheck').addEventListener('change', checkReady);
+document.querySelectorAll('input[name="issueType"]').forEach(function(r) {
+  r.addEventListener('change', checkReady);
 });
 
 function startScreener() {
