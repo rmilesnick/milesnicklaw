@@ -221,10 +221,10 @@ const PROXY_URL = 'https://milesnick-intake.rmilesnick.workers.dev';
 
 const PAGE_CONTEXT = new URLSearchParams(window.location.search).get('context') || '';
 
-const OPENING = PAGE_CONTEXT === 'whistleblower'
-  ? "If you have concerns about fraud involving government money, I can help you figure out whether a confidential case evaluation makes sense. What is the general nature of what you are dealing with?"
-  : "Thank you for reaching out. Before we begin — a few things worth knowing: this tool is not a lawyer and does not provide legal advice. No attorney-client relationship is created by this conversation. Please keep your answers general at this stage — detailed or sensitive information is better shared during a formal consultation. With that said — are you here about a potential whistleblower or False Claims Act matter, an employment discrimination or retaliation issue, or possibly both?";
-const history = [{ role: 'assistant', content: OPENING }];
+const WHISTLEBLOWER_OPENING = "If you have concerns about fraud involving government money, I can help you figure out whether a confidential case evaluation makes sense. What is the general nature of what you are dealing with?";
+const DEFAULT_OPENING = "I'm glad you reached out — it takes something to make this call, and I want to make sure you get an honest assessment of whether we can help. Are you here about a potential whistleblower or False Claims Act matter, an employment discrimination or retaliation issue, or possibly both?";
+
+let history = [];
 
 function addMsg(role, text) {
   const c = document.getElementById('chat');
@@ -348,9 +348,14 @@ document.getElementById('disclosureCheck').addEventListener('change', function()
 });
 
 function startScreener() {
+  const selectedType = (document.querySelector('input[name="issueType"]:checked') || {}).value || '';
+  const opener = (PAGE_CONTEXT === 'whistleblower' && selectedType === 'fca')
+    ? WHISTLEBLOWER_OPENING
+    : DEFAULT_OPENING;
+  history = [{ role: 'assistant', content: opener }];
   document.getElementById('disclosureGate').style.display = 'none';
   document.getElementById('screenerMain').style.display = 'block';
-  addMsg('assistant', OPENING);
+  addMsg('assistant', opener);
   document.getElementById('inp').focus();
 }
 </script>
