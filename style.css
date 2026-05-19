@@ -458,6 +458,13 @@ footer {
   .hero-copy { display: block; }
   .hero-media { margin-top: 1.5rem; margin-right: 0; height: auto; }
   .hero-media img { height: 220px !important; object-fit: cover !important; }
+  /* page-hero (inner pages): image first, then CTA, then body paragraphs */
+  .page-hero .hero-copy { display: flex !important; flex-direction: column; }
+  .page-hero .hero-copy .eyebrow { order: 1; }
+  .page-hero .hero-copy h1 { order: 2; }
+  .page-hero .hero-media { order: 3; margin-top: 1rem; margin-right: 0; height: auto; }
+  .page-hero .hero-copy > div:not(.hero-media) { order: 4; }
+  .page-hero .hero-copy > p { order: 5; }
   .hero-media::before { display: none; }
   .hero-media-rule { display: none; }
   .page-hero::after { display: none; }

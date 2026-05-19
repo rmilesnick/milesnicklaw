@@ -483,6 +483,15 @@
 .rm-branch{font-size:.7rem;letter-spacing:.07em;text-transform:uppercase;color:var(--gold);background:rgba(184,150,46,.08);border:1px solid rgba(184,150,46,.28);padding:.3rem .8rem;border-radius:2px;font-weight:500;}
 @media(max-width:700px){.rm-i1,.rm-i2,.rm-i3,.rm-i4{margin-left:0!important;}}
 
+/* Mobile hero ordering — image then CTA then paragraphs */
+@media(max-width:700px){
+  .page-hero .hero-copy{display:flex!important;flex-direction:column;}
+  .page-hero .hero-copy .eyebrow{order:1;}
+  .page-hero .hero-copy h1{order:2;}
+  .page-hero .hero-media{order:3;margin-top:1rem;margin-right:0;height:auto;}
+  .page-hero .hero-copy>div:not(.hero-media){order:4;}
+  .page-hero .hero-copy>p{order:5;}
+}
 .chat-bubble{position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;display:flex;align-items:center;gap:.5rem;background:#0d1b2a;color:#b8962e;border:1px solid #b8962e;padding:.6rem 1rem .6rem .75rem;border-radius:2rem;font-family:'Montserrat','Helvetica Neue',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;box-shadow:0 4px 20px rgba(0,0,0,.35);transition:background .2s,color .2s}
 .chat-bubble:hover{background:#b8962e;color:#0d1b2a}
 .wb-s3-grid{display:grid;grid-template-columns:3fr 2fr;grid-template-areas:"copy img" "table table";gap:2rem 2.5rem;}
