@@ -187,12 +187,14 @@
 <!-- SECTION 3: Decision-Tree Table -->
 <section class="section bg-navy" id="reporting-paths">
   <div class="wrap">
-    <div class="section-label">Reporting Paths</div>
-    <h2 class="h2 h2-light">Reporting paths are not interchangeable.</h2>
-    <p style="color:rgba(244,239,230,.62);font-size:.95rem;line-height:1.8;max-width:660px;margin-top:1rem;margin-bottom:2.5rem;">The agency, timing, method, and sequence of a report can affect legal options, award eligibility, and personal risk. A confidential evaluation before any report is filed helps identify the path that fits the facts.</p>
-    <div class="wb-reporting-layout">
-      <img src="photos/whistleblower-attorney.jpg" alt="Attorney reviewing whistleblower case materials" style="width:100%;height:auto;display:block;border-radius:2px;object-fit:cover;" />
-      <div style="overflow-x:auto;">
+    <div class="wb-s3-grid">
+      <div class="wb-s3-copy">
+        <div class="section-label">Reporting Paths</div>
+        <h2 class="h2 h2-light">Reporting paths are not interchangeable.</h2>
+        <p style="color:rgba(244,239,230,.62);font-size:.95rem;line-height:1.8;margin-top:1rem;margin-bottom:2.5rem;">The agency, timing, method, and sequence of a report can affect legal options, award eligibility, and personal risk. A confidential evaluation before any report is filed helps identify the path that fits the facts.</p>
+      </div>
+      <img class="wb-s3-img" src="photos/government-whistleblower.jpg" alt="Government whistleblower attorney" />
+      <div class="wb-s3-table">
       <table style="width:100%;min-width:560px;border-collapse:collapse;font-size:.87rem;">
         <thead>
           <tr style="border-bottom:2px solid var(--gold);">
@@ -423,8 +425,11 @@
 <style>
 .chat-bubble{position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;display:flex;align-items:center;gap:.5rem;background:#0d1b2a;color:#b8962e;border:1px solid #b8962e;padding:.6rem 1rem .6rem .75rem;border-radius:2rem;font-family:'Montserrat','Helvetica Neue',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;box-shadow:0 4px 20px rgba(0,0,0,.35);transition:background .2s,color .2s}
 .chat-bubble:hover{background:#b8962e;color:#0d1b2a}
-.wb-reporting-layout{display:grid;grid-template-columns:260px 1fr;gap:2.5rem;align-items:start;}
-@media(max-width:700px){.wb-reporting-layout{grid-template-columns:1fr;}}
+.wb-s3-grid{display:grid;grid-template-columns:3fr 2fr;grid-template-areas:"copy img" "table img";gap:0 2.5rem;align-items:start;}
+.wb-s3-copy{grid-area:copy;}
+.wb-s3-img{grid-area:img;width:100%;height:auto;display:block;border-radius:2px;object-fit:cover;}
+.wb-s3-table{grid-area:table;overflow-x:auto;}
+@media(max-width:700px){.wb-s3-grid{grid-template-columns:1fr;grid-template-areas:"copy" "img" "table";}}
 </style>
 </body>
 </html>
