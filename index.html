@@ -16,62 +16,209 @@
   <meta property="og:url" content="https://milesnick.law">
   <script type="application/ld+json">
   {
+<script type="application/ld+json">
+[
+  {
     "@context": "https://schema.org",
-    "@type": "LegalService",
-    "@id": "https://milesnick.law/#legalservice",
-    "name": "Milesnick Law",
+    "@type": ["LegalService", "LocalBusiness"],
+    "@id": "https://milesnick.law/#organization",
+    "name": "Milesnick Law, PLLC",
+    "alternateName": "Milesnick Law",
     "url": "https://milesnick.law",
-    "description": "False Claims Act, whistleblower, employment discrimination, retaliation, and civil rights representation in Oregon and Washington. Former Assistant U.S. Attorney.",
+    "logo": "https://milesnick.law/rob-milesnick.webp",
+    "image": "https://milesnick.law/rob-milesnick.webp",
+    "description": "Milesnick Law is a selective plaintiff-side litigation practice founded by Robert Milesnick, a former Assistant U.S. Attorney for the District of Oregon. The firm represents False Claims Act whistleblowers and employment discrimination plaintiffs in Oregon and Washington.",
+    "telephone": "+15036736607",
+    "email": "rob@milesnick.law",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Portland",
+      "addressRegion": "OR",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 45.5051,
+      "longitude": -122.6750
+    },
     "areaServed": [
-      { "@type": "State", "name": "Oregon" },
-      { "@type": "State", "name": "Washington" }
+      {
+        "@type": "State",
+        "name": "Oregon"
+      },
+      {
+        "@type": "State",
+        "name": "Washington"
+      }
     ],
     "serviceType": [
-      "False Claims Act Representation",
-      "Qui Tam Whistleblower Representation",
-      "Healthcare Fraud Representation",
-      "Government Contractor Fraud Representation",
-      "Employment Discrimination Representation",
-      "Whistleblower Retaliation Representation",
-      "Civil Rights Representation"
+      "False Claims Act & Qui Tam Whistleblower Representation",
+      "Employment Discrimination",
+      "Title VII Litigation",
+      "Whistleblower Retaliation",
+      "Federal Civil Rights Litigation"
     ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Legal Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "False Claims Act & Qui Tam Whistleblower Representation",
+            "description": "Representation of federal whistleblowers and qui tam relators under the False Claims Act in Oregon, Washington, and nationally.",
+            "url": "https://milesnick.law/fca.html"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Employment Discrimination & Retaliation",
+            "description": "Selective representation in Title VII race and sex discrimination, hostile work environment, and whistleblower retaliation cases in Oregon and Washington.",
+            "url": "https://milesnick.law/title-vii.html"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Whistleblower Retaliation",
+            "description": "Federal and state law claims for employees who suffered adverse action after reporting discrimination, fraud, or other illegal conduct.",
+            "url": "https://milesnick.law/whistleblower.html"
+          }
+        }
+      ]
+    },
+    "employee": {
+      "@id": "https://milesnick.law/#attorney"
+    },
+    "founder": {
+      "@id": "https://milesnick.law/#attorney"
+    },
+    "priceRange": "Contingency fee — no charge unless the case recovers",
+    "openingHours": "Mo-Fr 09:00-17:00",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+15036736607",
+      "contactType": "legal consultation",
+      "availableLanguage": "English",
+      "contactOption": "TollFree",
+      "areaServed": ["OR", "WA"],
+      "hoursAvailable": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "17:00"
+      }
+    },
+    "sameAs": [
+      "https://craftmediation.com"
+    ]
+  },
+
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://milesnick.law/#attorney",
+    "name": "Robert Milesnick",
+    "alternateName": "Rob Milesnick",
+    "jobTitle": "Attorney",
+    "description": "Robert Milesnick is a Portland, Oregon attorney and former Assistant U.S. Attorney for the District of Oregon. He selectively represents False Claims Act whistleblowers and employment discrimination plaintiffs in Oregon and Washington, and is also a certified mediator with 20+ years of experience.",
+    "url": "https://milesnick.law/about.html",
+    "image": "https://milesnick.law/rob-milesnick.webp",
+    "telephone": "+15036736607",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Portland",
+      "addressRegion": "OR",
+      "addressCountry": "US"
+    },
+    "alumniOf": [
+      {
+        "@type": "EducationalOrganization",
+        "name": "Syracuse University College of Law",
+        "sameAs": "https://www.syracuse.edu/academics/colleges/law/"
+      },
+      {
+        "@type": "EducationalOrganization",
+        "name": "Virginia Commonwealth University"
+      },
+      {
+        "@type": "EducationalOrganization",
+        "name": "Harvard Law School Program on Negotiation"
+      }
+    ],
+    "hasCredential": [
+      {
+        "@type": "EducationalOccupationalCredential",
+        "name": "Juris Doctor",
+        "educationalLevel": "Doctoral",
+        "credentialCategory": "degree",
+        "recognizedBy": {
+          "@type": "EducationalOrganization",
+          "name": "Syracuse University College of Law"
+        }
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        "name": "Oregon State Bar License",
+        "credentialCategory": "bar admission"
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        "name": "Washington State Bar License",
+        "credentialCategory": "bar admission"
+      }
+    ],
+    "worksFor": {
+      "@id": "https://milesnick.law/#organization"
+    },
     "knowsAbout": [
       "False Claims Act",
-      "Qui Tam",
-      "Healthcare Fraud",
-      "Medicare Fraud",
-      "Medicaid Fraud",
-      "Government Contractor Fraud",
-      "Whistleblower Retaliation",
+      "Qui Tam Litigation",
+      "Federal Whistleblower Law",
       "Employment Discrimination",
-      "Title VII",
-      "Civil Rights",
-      "LGBTQ Discrimination",
-      "Public Employee Rights"
+      "Title VII Civil Rights Act",
+      "Whistleblower Retaliation",
+      "Mediation",
+      "Federal Civil Litigation",
+      "DOJ Intervention in Qui Tam Cases"
     ],
-    "founder": {
-      "@type": "Person",
-      "name": "Rob Milesnick",
-      "jobTitle": "Attorney",
-      "description": "Former Assistant U.S. Attorney for the District of Oregon representing whistleblowers and employees in False Claims Act and civil rights matters.",
-      "hasCredential": [
-        "Former Assistant U.S. Attorney, District of Oregon",
-        "Admitted: District of Oregon, Western District of Washington, Ninth Circuit Court of Appeals"
-      ]
-    }
-  }
-  </script>
-  <script type="application/ld+json">
+    "hasOccupation": {
+      "@type": "Occupation",
+      "name": "Attorney",
+      "occupationLocation": {
+        "@type": "City",
+        "name": "Portland, Oregon"
+      }
+    },
+    "memberOf": [
+      {
+        "@type": "Organization",
+        "name": "Oregon State Bar"
+      },
+      {
+        "@type": "Organization",
+        "name": "Washington State Bar Association"
+      },
+      {
+        "@type": "Organization",
+        "name": "Oregon Mediation Association"
+      }
+    ]
+  },
+
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": "https://milesnick.law/#website",
-    "name": "Milesnick Law",
     "url": "https://milesnick.law",
-    "description": "False Claims Act whistleblower and employment discrimination representation in Oregon and Washington by former Assistant U.S. Attorney Rob Milesnick.",
+    "name": "Milesnick Law — Federal Whistleblower & Employment Discrimination",
+    "description": "Oregon and Washington whistleblower and employment discrimination litigation by former Assistant U.S. Attorney Rob Milesnick.",
     "publisher": {
-      "@type": "LegalService",
-      "@id": "https://milesnick.law/#legalservice"
+      "@id": "https://milesnick.law/#organization"
     },
     "potentialAction": {
       "@type": "SearchAction",
@@ -79,23 +226,11 @@
         "@type": "EntryPoint",
         "urlTemplate": "https://milesnick.law/intake.html"
       },
-      "query-input": "Free confidential case screening"
+      "query-input": "required name=search_term_string"
     }
   }
-  </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://milesnick.law/"}]}
-  </script>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<nav>
-  <a href="index.html" class="nav-logo">Milesnick Law, PLLC</a>
-  <ul class="nav-links">
+]
+</script>
     <li><a href="fca.html">False Claims Act</a></li>
     <li><a href="whistleblower.html">Whistleblower and Fraud</a></li>
     <li><a href="false-claims-act-case-evaluation.html">FCA Evaluation</a></li>
