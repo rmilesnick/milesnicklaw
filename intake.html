@@ -226,6 +226,14 @@ const WHISTLEBLOWER_OPENING = "If you have concerns about fraud involving govern
 const DEFAULT_OPENING = "I'm glad you reached out — it takes something to make this call, and I want to make sure you get an honest assessment of whether we can help. Are you here about a potential whistleblower or False Claims Act matter, an employment discrimination or retaliation issue, or possibly both?";
 
 let history = [];
+let conversationId = null;   // random per-conversation ID, sent to the Worker for the intake email
+let selectedIssueType = '';
+
+function newConversationId() {
+  if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+  const b = crypto.getRandomValues(new Uint8Array(16));
+  return Array.from(b, x => x.toString(16).padStart(2, '0')).join('').replace(/^(.{8})(.{4})(.{4})(.{4})(.{12})$/, '$1-$2-$3-$4-$5');
+}
 
 function addMsg(role, text) {
   const c = document.getElementById('chat');
@@ -312,7 +320,7 @@ async function go() {
       const res = await fetch(PROXY_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: history, context: PAGE_CONTEXT || undefined })
+        body: JSON.stringify({ messages: history, context: PAGE_CONTEXT || undefined, conversationId, issueType: selectedIssueType || undefined })
       });
       const data = await res.json();
       if (!data.content || !data.content[0]) throw new Error('No response');
@@ -356,6 +364,8 @@ function startScreener() {
     ? WHISTLEBLOWER_OPENING
     : DEFAULT_OPENING;
   history = [{ role: 'assistant', content: opener }];
+  conversationId = newConversationId();
+  selectedIssueType = selectedType;
   document.getElementById('disclosureGate').style.display = 'none';
   document.getElementById('screenerMain').style.display = 'block';
   addMsg('assistant', opener);

@@ -1,3 +1,8 @@
 name = "milesnick-intake"
 main = "cf-worker-updated.js"
 compatibility_date = "2026-05-18"
+
+# Keep Worker logs (including INTAKE_EMAIL_FAILED entries) searchable in the
+# Cloudflare dashboard instead of visible only in live tail.
+[observability]
+enabled = true
