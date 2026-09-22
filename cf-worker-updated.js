@@ -230,6 +230,37 @@ const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages';
 const MODEL = 'claude-opus-4-5-20251101';
 const MAX_TOKENS = 1024;
 
+// ── Intake email bridge ─────────────────────────────────────────────────
+// Trigger: the same condition intake.html uses to show the Calendly card,
+// i.e. the screener's reply text begins with [ROUTE:A].
+// (intake.html: raw.match(/^\[ROUTE:([ABC])\]\s*/) → showRoute('A') → Calendly link)
+const ROUTE_A_PATTERN = /^\[ROUTE:A\]/;
+const RESEND_API_URL = 'https://api.resend.com/emails';
+const INTAKE_EMAIL_TO = 'rob@milesnick.law';
+const INTAKE_EMAIL_FROM = 'Milesnick Law Intake <intake@milesnick.law>'; // domain must be verified in Resend
+const EXTRACT_MODEL = 'claude-haiku-4-5-20251001'; // fast model for the summary block only
+const EXTRACT_TIMEOUT_MS = 12000;
+const EMAIL_TIMEOUT_MS = 8000;
+const EMAIL_MAX_ATTEMPTS = 3;
+// If every send attempt fails, write the full transcript to Worker logs so the
+// intake can be recovered from the Cloudflare dashboard. Set false to log metadata only.
+const LOG_TRANSCRIPT_ON_FAILURE = true;
+
+const EXTRACT_PROMPT = `You are extracting intake details for an attorney from a screening chat transcript.
+Use ONLY what the prospective client explicitly stated. Do not infer, guess, or embellish. If a field was not stated, use null.
+Return ONLY a JSON object with these keys:
+{
+  "name": string|null,
+  "email": string|null,
+  "phone": string|null,
+  "track": "FCA/qui tam" | "Employment/civil rights" | "Both" | "Unclear",
+  "summary": string (3-6 plain sentences summarizing what the person described),
+  "employer_or_entity": string|null,
+  "involved_parties": string[] (names or roles of people/organizations mentioned; empty array if none),
+  "jurisdiction_or_location": string|null,
+  "important_dates": string[] (dates, timeframes, deadlines, filings, severance/NDA signings; empty array if none)
+}`;
+
 function corsHeaders(origin) {
   const allowed = ALLOWED_ORIGINS.has(origin) ? origin : 'https://milesnick.law';
   return {
@@ -266,7 +297,7 @@ export default {
       });
     }
 
-    const { messages, context } = body;
+    const { messages, context, conversationId, issueType } = body;
 
     if (!Array.isArray(messages) || messages.length === 0) {
       return new Response(JSON.stringify({ error: 'messages array required' }), {
@@ -349,9 +380,191 @@ export default {
 
     const data = await anthropicResponse.json();
 
+    // Intake email bridge: when the screener routes the visitor to the Calendly
+    // consultation, email Rob BEFORE the response goes back to the browser.
+    // notifyIntake never throws; the visitor's response is returned regardless.
+    const replyText = (data && Array.isArray(data.content) && data.content[0] && data.content[0].text) || '';
+    if (anthropicResponse.ok && ROUTE_A_PATTERN.test(replyText)) {
+      await notifyIntake({ env, messages, replyText, conversationId, issueType, context });
+    }
+
     return new Response(JSON.stringify(data), {
       status: anthropicResponse.status,
       headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) },
     });
   },
 };
+
+// ═══════════════════════════════════════════════════════════════════════
+// Intake email bridge helpers
+// ═══════════════════════════════════════════════════════════════════════
+
+async function notifyIntake({ env, messages, replyText, conversationId, issueType, context }) {
+  const convId = (typeof conversationId === 'string' && /^[A-Za-z0-9-]{8,64}$/.test(conversationId))
+    ? conversationId
+    : 'srv-' + crypto.randomUUID();
+  // Full transcript = everything the browser sent + the routing reply being returned now.
+  const transcript = [...messages, { role: 'assistant', content: replyText }];
+
+  try {
+    if (!env.RESEND_API_KEY) {
+      throw new Error('RESEND_API_KEY secret is not set');
+    }
+
+    const extracted = await extractIntakeDetails(env.ANTHROPIC_API_KEY, transcript);
+    const email = buildIntakeEmail({ convId, transcript, extracted, issueType, context });
+
+    // Idempotency key: same conversation + same transcript length = same email.
+    // Makes our own retries safe (Resend will not send twice within 24h).
+    const idempotencyKey = `intake-${convId}-${transcript.length}`;
+    await sendWithRetry(env.RESEND_API_KEY, email, idempotencyKey);
+
+    console.log(JSON.stringify({ event: 'intake_email_sent', conversationId: convId, turns: transcript.length }));
+  } catch (err) {
+    const failure = {
+      event: 'INTAKE_EMAIL_FAILED',
+      conversationId: convId,
+      error: String(err && err.message || err),
+    };
+    if (LOG_TRANSCRIPT_ON_FAILURE) {
+      failure.issueType = issueType || null;
+      failure.transcript = transcript.map(m => ({ role: m.role, content: messageText(m) }));
+    }
+    console.error(JSON.stringify(failure));
+  }
+}
+
+async function extractIntakeDetails(apiKey, transcript) {
+  try {
+    const plain = transcript
+      .map(m => (m.role === 'user' ? 'PROSPECTIVE CLIENT: ' : 'SCREENER: ') + messageText(m))
+      .join('\n\n');
+    const res = await fetch(ANTHROPIC_API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+      },
+      body: JSON.stringify({
+        model: EXTRACT_MODEL,
+        max_tokens: 1024,
+        system: EXTRACT_PROMPT,
+        messages: [{ role: 'user', content: 'TRANSCRIPT:\n\n' + plain }],
+      }),
+      signal: AbortSignal.timeout(EXTRACT_TIMEOUT_MS),
+    });
+    if (!res.ok) throw new Error('extract HTTP ' + res.status);
+    const out = await res.json();
+    const text = (out.content && out.content[0] && out.content[0].text) || '';
+    const start = text.indexOf('{');
+    const end = text.lastIndexOf('}');
+    if (start === -1 || end <= start) throw new Error('extract returned no JSON');
+    return JSON.parse(text.slice(start, end + 1));
+  } catch (err) {
+    // Summary is a convenience; the transcript is the record. Send without it.
+    console.warn(JSON.stringify({ event: 'intake_extract_failed', error: String(err && err.message || err) }));
+    return null;
+  }
+}
+
+async function sendWithRetry(resendKey, email, idempotencyKey) {
+  let lastErr;
+  for (let attempt = 1; attempt <= EMAIL_MAX_ATTEMPTS; attempt++) {
+    try {
+      const res = await fetch(RESEND_API_URL, {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + resendKey,
+          'Content-Type': 'application/json',
+          'Idempotency-Key': idempotencyKey,
+        },
+        body: JSON.stringify(email),
+        signal: AbortSignal.timeout(EMAIL_TIMEOUT_MS),
+      });
+      if (res.ok) return;
+      const detail = (await res.text()).slice(0, 500);
+      lastErr = new Error(`Resend HTTP ${res.status}: ${detail}`);
+      // 4xx other than 409 (concurrent) / 429 (rate limit) = config problem; retrying won't help.
+      if (res.status < 500 && res.status !== 409 && res.status !== 429) break;
+    } catch (err) {
+      lastErr = err; // network error or timeout: retry
+    }
+    if (attempt < EMAIL_MAX_ATTEMPTS) await new Promise(r => setTimeout(r, 750 * attempt));
+  }
+  throw lastErr || new Error('Resend send failed');
+}
+
+function buildIntakeEmail({ convId, transcript, extracted, issueType, context }) {
+  const when = new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles', dateStyle: 'full', timeStyle: 'short' }) + ' (Pacific)';
+  const x = extracted || {};
+  const val = v => (v === null || v === undefined || v === '' ? 'Not provided' : String(v));
+  const list = a => (Array.isArray(a) && a.length ? a.join('; ') : 'Not provided');
+
+  const fields = [
+    ['Conversation ID', convId],
+    ['Received', when],
+    ['Routing result', 'ROUTE:A (screener routed to consultation; Calendly link shown)'],
+    ['Track (AI read)', val(x.track)],
+    ['Issue type selected on page', val(issueType)],
+    ['Page context', val(context || 'intake page (default)')],
+    ['Name', val(x.name)],
+    ['Email', val(x.email)],
+    ['Phone', val(x.phone)],
+    ['Employer / entity', val(x.employer_or_entity)],
+    ['Involved parties', list(x.involved_parties)],
+    ['Jurisdiction / location', val(x.jurisdiction_or_location)],
+    ['Important dates / deadlines', list(x.important_dates)],
+  ];
+  const summary = extracted
+    ? val(x.summary)
+    : 'AI summary unavailable for this intake. The complete transcript below is the record.';
+
+  const who = m => (m.role === 'user' ? 'PROSPECTIVE CLIENT' : 'SCREENER');
+
+  const text = [
+    'NEW MILESNICK LAW INTAKE',
+    '',
+    ...fields.map(([k, v]) => `${k}: ${v}`),
+    '',
+    'SUMMARY (AI-generated; verify against transcript)',
+    summary,
+    '',
+    'COMPLETE TRANSCRIPT',
+    '',
+    ...transcript.map(m => `${who(m)}:\n${messageText(m)}\n`),
+  ].join('\n');
+
+  const rows = fields.map(([k, v]) =>
+    `<tr><td style="padding:4px 12px 4px 0;color:#555;vertical-align:top;white-space:nowrap"><b>${esc(k)}</b></td><td style="padding:4px 0">${esc(v)}</td></tr>`).join('');
+  const turns = transcript.map(m =>
+    `<div style="margin:0 0 12px;padding:10px 12px;border-left:3px solid ${m.role === 'user' ? '#B8962E' : '#1C2936'};background:${m.role === 'user' ? '#FBF8F0' : '#F5F6F7'}">` +
+    `<div style="font-size:11px;letter-spacing:.06em;color:#555;margin-bottom:4px"><b>${who(m)}</b></div>` +
+    `<div style="white-space:pre-wrap">${esc(messageText(m))}</div></div>`).join('');
+
+  const html =
+    `<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#1C2936;max-width:760px">` +
+    `<h2 style="margin:0 0 12px">New Milesnick Law Intake</h2>` +
+    `<table style="border-collapse:collapse;margin-bottom:16px">${rows}</table>` +
+    `<h3 style="margin:16px 0 6px">Summary <span style="font-weight:normal;font-size:12px;color:#777">(AI-generated; verify against transcript)</span></h3>` +
+    `<p style="margin:0 0 16px;white-space:pre-wrap">${esc(summary)}</p>` +
+    `<h3 style="margin:16px 0 8px">Complete transcript</h3>${turns}</div>`;
+
+  return {
+    from: INTAKE_EMAIL_FROM,
+    to: [INTAKE_EMAIL_TO],
+    subject: `New Milesnick Law Intake - ${convId}`,
+    text,
+    html,
+  };
+}
+
+function messageText(m) {
+  if (typeof m.content === 'string') return m.content;
+  if (Array.isArray(m.content)) return m.content.map(b => (b && b.text) || '').join('\n');
+  return '';
+}
+
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
